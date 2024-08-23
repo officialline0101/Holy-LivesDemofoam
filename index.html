@@ -250,7 +250,6 @@
         let selectedFullDate = '';
         let currentDate = new Date();
         let availabilityCache = {};
-        let irradiationsCount = ''; <!-- 選択された症状を格納する変数 -->
 
         document.addEventListener('DOMContentLoaded', function() {
             liff.init({
@@ -288,13 +287,6 @@
         repairButtons.style.display = 'none';
     }
 }
-
-        function showMenu(menu) {
-            document.querySelectorAll('.menu-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(menu).classList.add('active');
-        }
         
 function selectDate(cell) {
     // "unavailable" クラスが付いている場合はクリックを無効化
@@ -326,7 +318,6 @@ function selectDate(cell) {
                 name: document.getElementById('name').value,
                 visitCount: visitCount,
                 selectedSymptom: selectedSymptom,
-                irradiationsCount: irradiationsCount,
                 dates: [selectedFullDate],
                 message: document.getElementById('message').value
             };
