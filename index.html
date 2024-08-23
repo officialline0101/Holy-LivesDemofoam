@@ -191,59 +191,19 @@
         <div class="label">お客様名</div>
         <input type="text" id="name" placeholder="お名前を入力してください">
 
-        <div class="label">電話番号</div>
-        <input type="tel" id="phone" placeholder="電話番号を入力してください">
-
-        <div class="label">ネイルのオフに関して選択してください</div>
+        <div class="label">どちらかをご選択ください。</div>
         <div class="visit-buttons">
-            <button type="button" id="firstVisit" onclick="selectVisit(this)">オフあり</button>
-            <button type="button" id="repeatVisit" onclick="selectVisit(this)">オフなし</button>
+            <button type="button" id="firstVisit" onclick="selectVisit(this)">新規</button>
+            <button type="button" id="repeatVisit" onclick="selectVisit(this)">リピーター</button>
         </div>
 
-        <div class="label">メニューをお選びください</div>
-        <div class="menu-sections">
-            <button type="button" onclick="showMenu('male')">ハンドメニュー</button>
-            <button type="button" onclick="showMenu('female')">フットメニュー</button>
-        </div>
-
-        <div id="male" class="menu-section">
-            <label>◆ハンドメニュー◆</label>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)">デザインアートコース</button>
-                <button type="button" onclick="selectSymptom(this)">4本アートコース</button>
-                <button type="button" onclick="selectSymptom(this)">2本アートコース</button>
-                <button type="button" onclick="selectSymptom(this)">定額デザインコース</button>
-                <button type="button" onclick="selectSymptom(this)">グラデーション</button>
-                <button type="button" onclick="selectSymptom(this)">フレンチ</button>
-                <button type="button" onclick="selectSymptom(this)">ワンカラー</button>
-                <button type="button" onclick="selectSymptom(this)">お直しネイル</button>
-                <button type="button" onclick="selectSymptom(this)">長さ出し</button>
-                <button type="button" onclick="selectSymptom(this)">ハンドネイルケア</button>
-                <button type="button" onclick="selectSymptom(this)">オフのみ</button>
-            </div>
-            
-<label id="repairLabel">本数をお選びください</label>
-<div id="repairButtons" class="irradiations">
-                <button type="button" id="oneirradiations" onclick="selectirradiations(this)">1本</button>
-                <button type="button" id="twoirradiations" onclick="selectirradiations(this)">2本</button>
-                <button type="button" id="threeirradiations" onclick="selectirradiations(this)">3本</button>
-                <button type="button" id="fourirradiations" onclick="selectirradiations(this)">4本</button>
-                <button type="button" id="fiveirradiations" onclick="selectirradiations(this)">5本</button>
-                <button type="button" id="sixirradiations" onclick="selectirradiations(this)">6本</button>
-                <button type="button" id="sevenirradiations" onclick="selectirradiations(this)">7本</button>
-                <button type="button" id="eightirradiations" onclick="selectirradiations(this)">8本</button>
-                <button type="button" id="nineirradiations" onclick="selectirradiations(this)">9本</button>
-                <button type="button" id="tenirradiations" onclick="selectirradiations(this)">10本</button>
-            </div>
-        </div>
-
-        <div id="female" class="menu-section">
-            <label>◆フットメニュー◆</label>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)">フットデザインアートコース</button>
-                <button type="button" onclick="selectSymptom(this)">親指アートコース</button>
-                <button type="button" onclick="selectSymptom(this)">フット角質ケア</button>
-            </div>
+        <div class="label">業種をお選びください</div>
+        <div class="symptoms">
+            <button type="button" onclick="selectSymptom(this)">エステサロン</button>
+            <button type="button" onclick="selectSymptom(this)">ネイルサロン</button>
+            <button type="button" onclick="selectSymptom(this)">美容室</button>
+            <button type="button" onclick="selectSymptom(this)">整体院</button>
+            <button type="button" onclick="selectSymptom(this)">整骨院</button>
         </div>
 
         <div class="label">希望日時</div>
@@ -382,7 +342,6 @@ function selectDate(cell) {
         function submitForm() {
             const formData = {
                 name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
                 visitCount: visitCount,
                 selectedSymptom: selectedSymptom,
                 irradiationsCount: irradiationsCount,
@@ -391,7 +350,7 @@ function selectDate(cell) {
             };
 
 // フォームデータのチェック
-if (!formData.name || !formData.phone) {
+if (!formData.name) {
     alert('お名前・電話番号ご記入ください。');
     return;
 }
@@ -399,7 +358,7 @@ if (!formData.name || !formData.phone) {
             // LINEトークにメッセージを送信
             liff.sendMessages([{
                 type: 'text',
-                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nコース：${formData.selectedSymptom}${formData.visitCount}${formData.irradiationsCount}\nネイル：【${formData.visitCount}】\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
+                text: `【予約フォーム】\nお名前：${formData.name}\n業種：${formData.selectedSymptom}\n新規orリピーター：【${formData.visitCount}】\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
             }]).then(() => {
                 /* メッセージ送信成功時の処理 */
                 alert('当日キャンセルは無いようにお願いいたします。キャンセル料発生いたします。');
