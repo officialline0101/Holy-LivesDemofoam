@@ -268,25 +268,7 @@
             const buttons = document.querySelectorAll('.visit-buttons button');
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            visitCount = button.id === 'firstVisit' ? 'オフあり' : 'オフなし';
-        }
-
-        function selectirradiations(element) {
-            /* 訪問回数ボタンの選択状態をリセット */
-            document.getElementById('oneirradiations').classList.remove('active');
-            document.getElementById('twoirradiations').classList.remove('active');
-            document.getElementById('threeirradiations').classList.remove('active');
-            document.getElementById('fourirradiations').classList.remove('active');
-            document.getElementById('fiveirradiations').classList.remove('active');
-            document.getElementById('sixirradiations').classList.remove('active');
-            document.getElementById('sevenirradiations').classList.remove('active');
-            document.getElementById('eightirradiations').classList.remove('active');
-            document.getElementById('nineirradiations').classList.remove('active');
-            document.getElementById('tenirradiations').classList.remove('active');
-            /* クリックされたボタンを選択状態にする */
-            element.classList.add('active');
-            /* 選択された訪問回数を変数に格納 */
-            irradiationsCount = element.innerText;
+            visitCount = button.id === 'firstVisit' ? '新規' : 'リピーター';
         }
 
         function selectSymptom(button) {
@@ -298,7 +280,7 @@
     const repairLabel = document.getElementById('repairLabel');
     const repairButtons = document.getElementById('repairButtons');
 
-    if (selectedSymptom === 'お直しネイル' || selectedSymptom === '長さ出し') {
+    if (selectedSymptom === '新規' || selectedSymptom === 'リピーター') {
         repairLabel.style.display = 'block';
         repairButtons.style.display = 'flex';
     } else {
@@ -530,7 +512,7 @@ for (let i = 0; i < 7; i++) {
             cell.classList.add('unavailable');
         }
         // 日曜日で、営業日ではない場合
-        else if (slotStart.getDay() === 3 && !isBusinessDay && businessEventTimes.length === 0) {
+        else if (slotStart.getDay() === 0 && !isBusinessDay && businessEventTimes.length === 0) {
             cell.textContent = '✕';
             cell.classList.add('unavailable');
         }
